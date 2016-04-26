@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="/js/site.min.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="/css/public.css" />
+		<link rel="stylesheet" type="text/css" href="/css/jquery.ad-gallery.css" />
+		<link rel="stylesheet" type="text/css" href="/css/site.min.css" />
+		<style type="text/css">
+			.p1style{text-align: center;}
+			.flag{text-align: center;border-bottom: 1px dashed gray;border-top: 1px dashed gray;padding: 1% 0px;}
+			.flag span{padding:2% 1.5%;}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			
+
+		<header>
+			<div class="quotes">
+				<p>在寻求真理的长河中，唯有学习，不断地学习，勤奋地学习，有创造性地学习，才能越重山跨峻岭。
+					<br /><span style="padding-left: 75%;"> —— 华罗庚</span></p>
+				<div class="text5">技术之路</div>
+				<!--<div class="flower"><img src="/img/flower.jpg"></div>-->
+			</div>
+			<!--nav begin-->
+			<nav class="navbar bgcolor" role="navigation">
+				<div class="container-fluid">
+					<!-- Brand and toggle get grouped for better mobile display -->
+					<div class="navbar-header bgcolor">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-content-row-navbar-collapse-1">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+					</div>
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse" id="bs-content-row-navbar-collapse-1">
+						<ul class="nav navbar-nav navbar-right">
+							<li><a href="/">首页</a></li>
+							<li><a href="#">关于我</a></li>
+							<li class="list"><a href="/html/qian?curPage=1">前端</a>
+							</li>
+							<li class="list"><a href="/html/hou?curPage=1">后端</a>
+							</li>
+							<li><a href="#">学习视频</a></li>
+							<li><a href="#">相册</a></li>
+							<li><a href="#">留言板</a></li>
+						</ul>
+					</div>
+					<!-- /.navbar-collapse -->
+				</div>
+				<!-- /.container-fluid -->
+			</nav>
+			<!--nav end-->
+		</header>
+				</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-8">
+				<h3 class="p1style"><$- contents.title $></h3>
+				<p class="flag"><span>发布时间:<$= contents.time $></span>&nbsp;<span>作者:<$= contents.aname $></span>&nbsp;<span>类型:<$= contents.ptype==0?'前端/':'后端/' $><$= contents.tname $></span></p>
+				<$- contents.content $>
+				</div>
+			</div>
+			
+		</div>
+	</body>
+</html>

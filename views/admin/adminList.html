@@ -1,0 +1,60 @@
+<style type="text" id="adminList">
+	<div class="panel panel-success adminList">
+		<div class="panel-heading">管理员列表
+				<span class="glyphicon glyphicon-plus pull-right"></span>
+		</div>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>用户名</th>
+					<th>超级管理员</th>
+					<th>修改</th>
+					<th>删除</th>
+				</tr>
+			</thead>
+			<tbody>
+				<%users.forEach(function(user){%>
+					<tr>
+						<td>
+							<%= user.admin_id%>
+						</td>
+						<td>
+							<%= user.admin_name%>
+						</td>
+						<td>
+							<%= (user.admin_issuper ? '是' : '否')%>
+						</td>
+						<td><span class="glyphicon glyphicon-pencil" updateid="<%= user.admin_id %>"></span></td>
+						<td><span class="glyphicon glyphicon-trash" uid="<%= user.admin_id %>"></span></td>
+						
+					</tr>
+					<%})%>
+			</tbody>
+		</table>
+	</div>
+<script type="text/javascript">
+	$(function(){
+	$("#adminMain .adminList .glyphicon-plus").click(function(){
+		var html = ejs.render($("#addAdminer").html());
+		$.pageChange(html);
+		
+	});
+	
+	$("#adminMain .adminList .glyphicon-trash").click(function(){
+		M.adminDel({"uid":$(this).attr("uid")}).done(function(obj){
+			if(obj.code){
+				M.adminList();
+			}else{
+				$.modal("提示","删除失败");
+			}
+		});
+	});
+	
+	$("#adminMain .adminList .glyphicon-pencil").click(function(){
+		M.adminUpdatelist({"updateid":$(this).attr("updateid")});
+	});
+})
+
+</script>
+</style>

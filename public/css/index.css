@@ -1,0 +1,29 @@
+
+/*#nav { width: 100%; line-height: 50px; height: 50px; font-family: "微软雅黑"; font-size: 16px; background: rgba(56,134,72,.8); text-align: center; position: relative; border-bottom: #559765 1px solid }*/
+/*#nav ul { width: 1000px; margin: auto; background: url(../img/heart.png) left no-repeat; overflow: hidden }
+#nav ul li { display: inline; margin: 0 12px; text-align: center; }
+#nav ul li a { color: #fff; }*/
+
+.content-left{float: left;}
+.content-left >div{margin-top: 30px;}
+.content-left h2 {
+    border-bottom: #474645 2px solid;
+    margin: 20px 8px 20px 8px;
+    height: 26px;
+    overflow: hidden;
+    line-height: 28px;
+    font-size: 16px;
+    font-family: "微软雅黑";
+    letter-spacing: 2px;
+}
+
+.content-left h2 p,.content-left h2 p{background: #474645;width: 30%;color: #fff;text-align: center;box-shadow: #999 4px 5px 1px;}
+.content-left h2 p span,.content-left h2 p span{color: #38b3d4;}
+.content-right{width: 30%;height:500px;float: left;}
+
+#qian-content,#hou-content{padding-left: 2%;}
+#qian-content span,#hou-content span{padding-right: 2%;}
+.content-left .border_i{border-bottom: 1px dashed gray;height: 45px;}
+.content-left a{float: right;display: inline-block;background: gray;border:1px solid gray;padding: 10px;border-radius: 5px;clear: both;}
+.content-left a{color:#2B2B2B}
+.content-left a:hover {background: black;color:#8B0000;}

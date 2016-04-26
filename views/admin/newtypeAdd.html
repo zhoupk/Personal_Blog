@@ -1,0 +1,60 @@
+<style type="text" id="newtypeAdd">
+	<div class="panel panel-default">
+		<div class="panel-heading"> 增加博文类型 </div>
+	</div>
+
+	<div class="panel-body newtypeAdd">
+		<div class="form-horizontal addnewtypeform">
+			
+			<div class="form-group">
+				<label class="col-md-2 control-label"></label>
+				<div class="col-md-10 errorinfo">
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="col-md-2 control-label">类型名称:</label>
+				<div class="col-md-10">
+					<input type="text" placeholder="type"  class="form-control" name="tname">
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="col-md-2 control-label">父类:</label>
+				<div class="col-md-10">
+					<select id="parent_typeid" style="width: 100%;" class="selecter_3" data-selecter-options='{"cover":"true"}'>
+							<option value="0">前端</option>
+							<option value="1">后端</option>
+					</select>	
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<div class="col-md-offset-2 col-md-10">
+					<button type="button" class="btn btn-primary btn-block addbtn" name="addnewtype">增加</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		$(function() {
+			$("#adminMain .newtypeAdd .addbtn").click(function() {
+				var tname = $("#adminMain .newtypeAdd input[name=tname]").val();
+				var parent_typeid=$("#parent_typeid").val();
+				if ($.validata.isempty(tname) == false) {
+					$("#adminMain .newtypeAdd .errorinfo").loginalert("warning", "类型名不能为空");
+					return;
+				}
+			
+				M.newtypeAdd({"tname": tname,"parent_typeid":parent_typeid}).done(function(obj) {
+					if (obj.code == 1) {
+					$.modal("提示","增加成功");
+					M.newtypeList();
+					} else {
+						$("#adminMain .newtypeAdd .errorinfo").loginalert("error", obj.msg);
+					}
+				});
+			});
+		})
+	</script>
+</style>

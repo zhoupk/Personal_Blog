@@ -1,0 +1,54 @@
+<style type="text" id="newtypeList">
+	<div class="panel panel-success newtypeList">
+		<div class="panel-heading">博文分类列表<span class="glyphicon glyphicon-plus pull-right"></span></div>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>分类名称</th>
+					<th>父节点</th>
+					<th>排序</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<%type.forEach(function(type){%>
+					<tr>
+						<td>
+							<%= type.typeid%>
+						</td>
+						<td>
+							<%= type.typename%>
+						</td>
+						<td>
+							<%= type.parent_typeid%>
+						</td>
+						<td>
+							<%= type.typeorder%>
+						
+						</td>
+						<td><span class="glyphicon glyphicon-trash" tid="<%= type.typeid%>"></span></td>
+					</tr>
+					<%})%>
+			</tbody>
+		</table>
+	</div>
+<script type="text/javascript">
+	$(function(){
+	//增加
+	$("#adminMain .newtypeList .glyphicon-plus").click(function(){	
+		var html = ejs.render($("#newtypeAdd").html());
+		$.pageChange(html);
+		
+	});
+	
+	$("#adminMain .newtypeList .glyphicon-trash").click(function(){
+		M.newtypeDel({"tid":$(this).attr("tid")}).done(function(obj){if(obj.code){
+				M.newtypeList();
+			}else{
+				$.modal("提示","删除失败");
+			}});
+	})
+})
+</script>
+</style>

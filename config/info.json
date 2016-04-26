@@ -1,8 +1,11 @@
 {
 	"error":{
-		"loginerror":"用户名或密码错误"
+		"loginerror":{"code":0,"msg":"用户名或密码错误"},
+		"addadminererror":{"code":0,"msg":"增加失败,请稍后重试"},
+		"checkerror":{"code":0,"msg":"用户已存在,请重新输入"},
+		"adminDelError":{"code":0,"msg":"删除失败,请稍后重试"}
 	},
 	"message":{
-		
+		"success":{"code":1}
 	}
 }

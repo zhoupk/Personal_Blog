@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="/js/site.min.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="/css/index.css" />
+		<link rel="stylesheet" type="text/css" href="/css/public.css" />
+		<link rel="stylesheet" type="text/css" href="/css/jquery.ad-gallery.css" />
+		<link rel="stylesheet" type="text/css" href="/css/site.min.css" />
+	</head>
+
+	<body>
+		<div class="container">
+			
+
+		<header>
+			<div class="quotes">
+				<p>在寻求真理的长河中，唯有学习，不断地学习，勤奋地学习，有创造性地学习，才能越重山跨峻岭。
+					<br /><span style="padding-left: 75%;"> —— 华罗庚</span></p>
+				<div class="text5">技术之路</div>
+				<!--<div class="flower"><img src="/img/flower.jpg"></div>-->
+			</div>
+			<!--nav begin-->
+			<nav class="navbar bgcolor" role="navigation">
+				<div class="container-fluid">
+					<!-- Brand and toggle get grouped for better mobile display -->
+					<div class="navbar-header bgcolor">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-content-row-navbar-collapse-1">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+					</div>
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse" id="bs-content-row-navbar-collapse-1">
+						<ul class="nav navbar-nav navbar-right">
+							<li><a href="/">首页</a></li>
+							<li><a href="/about.html">关于我</a></li>
+							<li class="list"><a href="/html/qian?curPage=1">前端</a>
+							</li>
+							<li class="list"><a href="/html/hou?curPage=1">后端</a>
+							</li>
+							<li><a href="#">学习视频</a></li>
+							<li><a href="#">相册</a></li>
+							<li><a href="#">留言板</a></li>
+						</ul>
+					</div>
+					<!-- /.navbar-collapse -->
+				</div>
+				<!-- /.container-fluid -->
+			</nav>
+			<!--nav end-->
+		</header>
+		
+	</div>
+		<div class="container" >
+			<div class="row">
+				<div class="col-sm-9 col-xs-12 content-left">
+					<h2><p><span>前端</span>知识</p></h2>
+
+					<div id="qian-content" class="hidden-xs">
+						<$ contents[0].forEach(function(content){ $>
+							<div>
+								<h5><$= content.title $></h5>
+								<p><span>发布时间:<$= content.time $></span>&nbsp;<span>作者:<$= content.aname $></span>&nbsp;<span>类型:<$= content.ptype==0?'前端/':'后端/' $><$= content.tname $></span></p>
+							<$- content.content $>
+						</div>
+						
+						<a href="/html/qian/archive?nid=<$= content.nid $>">阅读全文>></a>
+						<div class="border_i"></div>
+						
+					<$})$>
+				</div>
+				
+				<div id="qian-content" class="visible-xs">
+						<$ contents[0].forEach(function(content){ $>
+							<div>
+								<h5><$= content.title $></h5>
+								<p><span>发布时间:<$= content.time $></span>&nbsp;<span>作者:<$= content.aname $></span>&nbsp;<span>类型:<$= content.ptype==0?'前端/':'后端/' $><$= content.tname $></span></p>
+								<a href="/html/qian/archive?nid=<$= content.nid $>">阅读全文>></a>
+								
+						</div>
+						
+						
+						<div class="border_i"></div>
+						
+					<$})$>
+				</div>
+
+				<h2><p><span>后台</span>知识</p></h2>
+				<div id="hou-content" class="hidden-xs">
+					<$ contents[1].forEach(function(content){ $>
+						<div>
+							<h5><$= content.title $></h5>
+							<p><span>发布时间:<$= content.time $></span>&nbsp;<span>作者:<$= content.aname $></span>&nbsp;<span>类型:<$= content.ptype==0?'前端/':'后端/' $><$= content.tname $></span></p>
+							<$- content.content $>
+							</div>
+							<a href="/html/hou/archive?nid=<$= content.nid $>">阅读全文>></a>
+							<div class="border_i"></div>
+							<$})$>
+					</div>
+					
+					<div id="hou-content" class="visible-xs">
+						<$ contents[1].forEach(function(content){ $>
+							<div>
+								<h5><$= content.title $></h5>
+								<p><span>发布时间:<$= content.time $></span>&nbsp;<span>作者:<$= content.aname $></span>&nbsp;<span>类型:<$= content.ptype==0?'前端/':'后端/' $><$= content.tname $></span></p>
+								<a href="/html/hou/archive?nid=<$= content.nid $>">阅读全文>></a>
+								
+						</div>
+						
+						
+						<div class="border_i"></div>
+						
+					<$})$>
+				</div>
+				</div>
+				<div class="col-sm-3 content-right hidden-xs">
+					
+				</div>
+			</div>
+		</div>
+
+	</body>
+
+</html>
