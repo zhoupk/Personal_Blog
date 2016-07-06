@@ -1,0 +1,61 @@
+<style type="text" id="imgList">
+	<div class="panel panel-success imgList">
+		<div class="panel-heading">图片列表
+				<span class="glyphicon glyphicon-plus pull-right"></span>
+		</div>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>图片名</th>
+					<th>添加时间</th>
+					<th>类型</th>
+					<th>删除</th>
+				</tr>
+			</thead>
+			<tbody>
+				<%imgs.forEach(function(image){%>
+					<tr>
+						<td>
+							<%= image.imgid%>
+						</td>
+						<td>
+							<%= image.imgname%>
+						</td>
+						<td>
+							<%= image.time %>
+						</td>
+						<td>
+							<%= image.pname %>
+						</td>
+						
+						<td><span class="glyphicon glyphicon-trash" imgid="<%= image.imgid %>"></span></td>
+						
+					</tr>
+					<%})%>
+			</tbody>
+		</table>
+	</div>
+<script type="text/javascript">
+	$(function(){
+	$("#adminMain .imgList .glyphicon-plus").click(function(){
+		M.getimgName().done(function(names){
+			var html = ejs.render($("#imgAdd").html(),{names:names});
+			$.pageChange(html);
+		});
+	});
+	
+	$("#adminMain .imgList .glyphicon-trash").click(function(){
+		M.imgDel({"imgid":$(this).attr("imgid")}).done(function(obj){
+			if(obj.code){
+				M.imgList();
+			}else{
+				$.modal("提示","删除失败");
+			}
+		});
+	});
+
+})
+
+</script>
+</style>

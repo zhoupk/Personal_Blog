@@ -4,6 +4,8 @@
 		<meta charset="UTF-8">
 		<title></title>
 		<script src="/js/site.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/js/ejs.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/js/cheack.js" type="text/javascript" charset="utf-8"></script>
 		<link rel="stylesheet" type="text/css" href="/css/public.css" />
 		<link rel="stylesheet" type="text/css" href="/css/jquery.ad-gallery.css" />
 		<link rel="stylesheet" type="text/css" href="/css/site.min.css" />
@@ -11,7 +13,37 @@
 			.p1style{text-align: center;}
 			.flag{text-align: center;border-bottom: 1px dashed gray;border-top: 1px dashed gray;padding: 1% 0px;}
 			.flag span{padding:2% 1.5%;}
+			#commentinput input{padding: 5px 10px;
+							    border: 1px solid #00a3cf;
+							    background-color: transparent;
+							    font-size: 12px;
+							    color: #333;
+							    width: 40%;}
+			#comment_submit{
+							    background-color: #00a3cf;
+							    border: none;
+							    color: #FFFFFF;
+							    text-align: center;
+							    cursor: pointer;
+							}
+			#comment {
+					    width: 90%;
+					    border: 1px solid #00a3cf;
+					    padding: 5px 10px;
+					    background-color: transparent;
+					    font-size: 12px;
+					    color: #333;}
+			#commentcontent .div_border{border-bottom: 1px dashed gray;border-top:1px dashed gray ;padding: 3px 0px;margin-bottom: 5px;}
+		    #commentcontent .div_border a{float: right;}
 		</style>
+		<script type="text/javascript">
+			$(function(){
+				M.searchinner();
+				M.hotlistinner();
+				M.commentcontent();
+				M.commentinput();
+			})
+		</script>
 	</head>
 	<body>
 		<div class="container">
@@ -26,7 +58,7 @@
 			</div>
 			<!--nav begin-->
 			<nav class="navbar bgcolor" role="navigation">
-				<div class="container-fluid">
+				<div class="container">
 					<!-- Brand and toggle get grouped for better mobile display -->
 					<div class="navbar-header bgcolor">
 						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-content-row-navbar-collapse-1">
@@ -45,9 +77,10 @@
 							</li>
 							<li class="list"><a href="/html/hou?curPage=1">后端</a>
 							</li>
-							<li><a href="#">学习视频</a></li>
-							<li><a href="#">相册</a></li>
+							
+							<li><a href="/html/photo">相册</a></li>
 							<li><a href="#">留言板</a></li>
+							<li><a href="/login.html">后台入口</a></li>
 						</ul>
 					</div>
 					<!-- /.navbar-collapse -->
@@ -59,13 +92,35 @@
 				</div>
 		<div class="container">
 			<div class="row">
-				<div class="col-sm-8">
+				<div class="col-sm-9">
 				<h3 class="p1style"><$- contents.title $></h3>
 				<p class="flag"><span>发布时间:<$= contents.time $></span>&nbsp;<span>作者:<$= contents.aname $></span>&nbsp;<span>类型:<$= contents.ptype==0?'前端/':'后端/' $><$= contents.tname $></span></p>
 				<$- contents.content $>
+					<div id="commentcontent">
+							
+					</div>
+					<div id="commentinput">
+						
+					</div>
+				</div>
+					
+					<div class="col-sm-3 content-right">
+					<div id="searchinner">	
+					</div>
+					<div id="hotcontent">
+					</div>
+				</div>
+				</div>
+				<div class="container" id="bottomsy">
+					<p>Powered by dedecms Copyright &copy; 2016 www.xxx.com All rights reserved. </p>
 				</div>
 			</div>
 			
 		</div>
+	<$- include searchmodel.html-$>
+	<$- include hotlist.html -$>
+	<$- include comment_content.html -$>
+	<$- include comment_input.html -$>
 	</body>
+	
 </html>

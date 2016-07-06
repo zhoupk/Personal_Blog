@@ -1,0 +1,12 @@
+<script type="text" id="hotlist">
+	<div class="panel panel-default">
+		<div class="panel-heading">热门文章</div>
+		<div class="panel-body">
+			<ol >
+				<% contents.forEach(function(content){ %>
+					<li style="list-style:decimal ;"><a href="/html/<%= content.parent_typeid==0?'qian':'hou' %>/archive?nid=<%= content.nid %>"><%= content.title %><span style="float: right;"><%= content.readCount %></span></a></li>
+				<% }) %>
+			</ol>
+		</div>
+	</div>
+</script>

@@ -6,14 +6,16 @@ a:link, a:visited { text-decoration: none; }
 ul, li { list-style-type: none }
 img { border: 0; }
 
-body { font-size: 12px; background: #838B83 url(../img/bg.jpg) center 0 scroll no-repeat; color: #5d5d5d; }
+body { font-size: 12px; background: #838B83 center 0 scroll no-repeat; color: #5d5d5d; }
 .blank { height: 5px; overflow: hidden; width: 100%; margin: auto; clear: both }
 /* header */
-header {margin: auto; border-bottom: #3c7a48 1px solid;background: url(/img/road.jpg) no-repeat;background-size: 100% 100%;}
-.quotes { width: 75%; position: relative; margin: 60px auto 120px auto; }
+header { border-bottom: #3c7a48 1px solid;background: url(/img/road.jpg) no-repeat;background-size: 100% 100%;}
+.quotes { width: 75%; position: relative; margin: 0px auto 120px auto; }
 .quotes p { text-shadow: #246640 1px 1px 1px; color: #fff; width: 330px; line-height: 26px; }
 .text5 { position: absolute; left: 0px; top: 160px; font-family: "微软雅黑"; font-size: 30px; color: #FFF; -webkit-box-reflect: below -3px -webkit-gradient(linear, 0 0, 0 100%, from(transparent), to(white)); }/* below文字倒影方向向下，距离3px 颜色渐变由上往下 */
 /*.flower { position: absolute; right: 0; top: 60px; background: url(../img/flower.png) no-repeat; width: 173px; height: 175px; z-index: 2 }
 .flower img { margin: 22px 0 0 17px; display: block; }*/
 /* nav */
-.bgcolor{background: rgba(144,144,144,.8);width: 100%;font-family: "微软雅黑";font-size: 16px;}
+.bgcolor{background: rgba(144,144,144,.8);font-family: "微软雅黑";font-size: 16px;}
+#bottomsy{width: 100%;height: 40px;background:rgba(144,144,144,.8)}
+#bottomsy p{line-height: 40px;text-align: center;}

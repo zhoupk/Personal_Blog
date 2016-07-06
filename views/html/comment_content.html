@@ -1,0 +1,24 @@
+<style type="text" id="comment_content">
+	<h4>博文评论</h4>
+	<% comments.forEach(function(comm){ %>
+		<div class="div_border">
+		<p>游客：<%= comm.cname %></p>
+		<p>说：<%= comm.ccontent %></p>
+		时间：<%= comm.time %><a href="#" >回复</a>
+		<div class="resprev"></div>
+		</div>
+		
+	<% }) %>
+		
+</style>
+
+
+<!--<script type="text/javascript">
+	$(function(){
+		var contentparent=$(".comment_content>div:first-child");
+		if($(contentflag.attr("class").substr(0,6)=="parent"){
+			var contentflagNum='flag'+contentparent.substr(6);
+			$(".comment_content ."+contentflagNum+" .resprev:after").append(contentparent);
+		}
+	})
+</script>-->

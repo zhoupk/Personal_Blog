@@ -1,16 +1,32 @@
 <!DOCTYPE html>
 <html>
+
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
 		<script src="/js/site.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="/js/ejs.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="/js/cheack.js" type="text/javascript" charset="utf-8"></script>
-		<link rel="stylesheet" type="text/css" href="/css/index.css" />
 		<link rel="stylesheet" type="text/css" href="/css/public.css" />
 		<link rel="stylesheet" type="text/css" href="/css/jquery.ad-gallery.css" />
 		<link rel="stylesheet" type="text/css" href="/css/site.min.css" />
+		<style type="text/css">
+			 .div_border{border-bottom: 1px dashed gray;border-top:1px dashed gray ;padding: 3px 0px;margin-bottom: 5px;}
+		    .div_border a{float: right;}
+		</style>
+						<script type="text/javascript">
+	$(function(){
+		
+	M.commentGetbytitle({id:$(".col-sm-9 .panel-heading a").attr("name")});
+		
+	})
+	
+		
+	
+	</script>
+			
 	</head>
+	
 	<body>
 		<div class="container">
 
@@ -23,25 +39,26 @@
 				</div>
 				<!--nav begin-->
 				<nav class="navbar bgcolor" role="navigation">
-					<div>
+					<div class="container">
 						<!-- Brand and toggle get grouped for better mobile display -->
 						<div class="navbar-header bgcolor">
 							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-content-row-navbar-collapse-1">
-								<span class="sr-only">Toggle navigation</span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-							</button>
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
 						</div>
 						<!-- Collect the nav links, forms, and other content for toggling -->
 						<div class="collapse navbar-collapse" id="bs-content-row-navbar-collapse-1">
 							<ul class="nav navbar-nav navbar-right">
 								<li><a href="/">首页</a></li>
-								<li><a href="/about.html">关于我</a></li>
+								<li><a href="#">关于我</a></li>
 								<li class="list"><a href="/html/qian?curPage=1">前端</a>
 								</li>
 								<li class="list"><a href="/html/hou?curPage=1">后端</a>
 								</li>
+
 								<li><a href="/html/photo">相册</a></li>
 								<li><a href="#">留言板</a></li>
 								<li><a href="/login.html">后台入口</a></li>
@@ -53,32 +70,36 @@
 				</nav>
 				<!--nav end-->
 			</header>
-
 		</div>
-		
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-9">
-				<div class="panel-heading">博文搜索</div>
-							<div class="panel-body">
-								<p>姓名: 周贤伟</p>
-								<p>QQ: 928681331</p>
-								<p>现居: 广东省 - 广州市</p>
-								<p>爱好: 下棋，看电影</p>
-								<p>喜欢的音乐: 《月光》,《光辉岁月》...</p>
-							</div>
+					<$ commenttitles.forEach(function(commenttitle){$>
+						<div class="panel-heading">对
+							<a href="" name="<$= commenttitle.nid $>">
+								<$=commenttitle.title $>
+							</a>的评论</div>
+							
+						<div class="panel-body" id="theonecomment">
+							
+						</div>
+				<$ }) $>
 				</div>
-					
-					<div class="col-sm-3 content-right">
-					<div id="searchinner">	
+
+				<div class="col-sm-3 content-right">
+					<div id="searchinner">
 					</div>
 					<div id="hotcontent">
 					</div>
 				</div>
-				</div>
-				<div class="container" id="bottomsy">
-					<p>Powered by dedecms Copyright &copy; 2016 www.xxx.com All rights reserved. </p>
-				</div>
 			</div>
+			<div class="container" id="bottomsy">
+				<p>Powered by dedecms Copyright &copy; 2016 www.xxx.com All rights reserved. </p>
+			</div>
+		</div>
+<$- include searchmodel.html-$>
+	<$- include hotlist.html -$>
+	<$- include comment_content.html -$>
 	</body>
+
 </html>

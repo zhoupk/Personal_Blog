@@ -1,0 +1,74 @@
+<style type="text" id="photoList">
+	<div class="panel panel-success photoList">
+		<div class="panel-heading">相册列表
+				<span class="glyphicon glyphicon-plus pull-right"></span>
+		</div>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>相册名</th>
+					<th>添加时间</th>
+					<th>修改</th>
+					<th>删除</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% photos.forEach(function(photo){ %>
+					<tr>
+						<th>
+							<%= photo.pid%>
+						</th>
+						<td>
+							<%= photo.pname%>
+						</td>
+						<th>
+							<%= photo.time %>
+						</th>
+						<th><span class="glyphicon glyphicon-pencil" updateid="<%= photo.pid %>"></span>
+						<div style="display: none;">
+								<button class="yes" updateid="<%= photo.pid %>">确认</button>
+								<button class="no">取消</button>
+							</div></th>
+						<th><span class="glyphicon glyphicon-trash" pid="<%= photo.pid %>"></span></th>
+						
+					</tr>
+					<%})%>
+			</tbody>
+		</table>
+	</div>
+<script type="text/javascript">
+	$(function(){
+	$("#adminMain .photoList .glyphicon-plus").click(function(){
+			var html = ejs.render($("#photoAdd").html());
+			$.pageChange(html);
+		});
+	$.pencil();
+	$("#adminMain .photoList .yes").click(function(){
+		M.photoUpdate({updateid:$(this).attr("updateid"),pname:$("input[name=td0]").val()}).done(function(obj){
+			if(obj.code){
+				$.modal("提示","修改成功");
+				M.photoList();
+			}else{
+				$.modal("提示","修改失败");
+			}
+		});
+		
+	});
+	$("#adminMain .photoList .glyphicon-trash").click(function(){
+		M.photoDel({"pid":$(this).attr("pid")}).done(function(obj){
+			if(obj.code){
+				M.photoList();
+			}else{
+				$.modal("提示","删除失败");
+			}
+		});
+	});
+	
+	$("#adminMain .photoList .glyphicon-pencil").click(function(){
+		M.adminUpdatelist({"updateid":$(this).attr("updateid")});
+	});
+})
+
+</script>
+</style>

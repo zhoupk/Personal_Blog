@@ -1,0 +1,70 @@
+@charset "utf-8";
+/* 代码整理：懒人之家 */
+
+body {
+	font-family:arial;
+}
+.qitem {
+	width:224px;
+	height: 224px;
+	border:4px solid #222;
+	margin:5px 5px 5px 0;
+	background: url('/img/bg.jpg') no-repeat;
+	/* required to hide the image after resized */
+	overflow:hidden;
+	/* for child absolute position */
+	position:relative;
+	/* display div in line */
+	float:left;
+	cursor:hand;
+	cursor:pointer;
+	margin-right: 5%;
+}
+.qitem img {
+	border:0;
+	/* allow javascript moves the img position*/
+		position:absolute;
+	z-index:200;
+}
+.qitem .caption {
+	position:absolute;
+	top: 30%;
+	left: 30%;
+	z-index:0;
+	color:#ccc;
+	display:block;
+}
+.qitem .caption h4 {
+	font-size:12px;
+	padding:10px 5px 0 8px;
+	margin:0;
+	color:#369ead;
+}
+.qitem .caption p {
+	font-size:10px;
+	padding:3px 5px 0 8px;
+	margin:0;
+}
+/* Setting for corners */
+
+.topLeft, .topRight, .bottomLeft, .bottomRight {
+	position:absolute;
+	background-repeat: no-repeat;
+	float:left;
+}
+.topLeft {
+	background-position: top left;
+}
+.topRight {
+	background-position: top right;
+}
+.bottomLeft {
+	background-position: bottom left;
+}
+.bottomRight {
+	background-position: bottom right;
+}
+.clear {
+	clear:both;
+}
+

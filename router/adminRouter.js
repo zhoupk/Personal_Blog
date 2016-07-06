@@ -9,7 +9,6 @@ router.post("/list",function(req,res,next){
 	adminModule.list().on("success",function(results,fields){
 		//这是服务器端渲染的做法,将页面渲染后再发给客户端,优点是易于搜索引擎搜索,缺点是给服务器端造成压力
 		res.json(results);
-		
 	}).on("error",function(err){
 		return next(err);
 	});
@@ -51,10 +50,9 @@ router.post("/adminDel",function(req,res,next){
 	});
 });
 
-router.post("/adminUpdatelist",function(req,res,next){
-	console.log(req.body.updateid);
-	adminModule.Updatelist(req.body.updateid).on("success",function(results,fields){
-			res.json(results);
+router.post("/adminUpdate",function(req,res,next){
+	adminModule.adminUpdate(req.body.updateid,req.body.uname,req.body.upassword).on("success",function(results,fields){
+			res.json(info.message.success);
 	}).on("error",function(err){
 		return next(err);
 	});

@@ -24,6 +24,6 @@
 #qian-content,#hou-content{padding-left: 2%;}
 #qian-content span,#hou-content span{padding-right: 2%;}
 .content-left .border_i{border-bottom: 1px dashed gray;height: 45px;}
-.content-left a{float: right;display: inline-block;background: gray;border:1px solid gray;padding: 10px;border-radius: 5px;clear: both;}
-.content-left a{color:#2B2B2B}
-.content-left a:hover {background: black;color:#8B0000;}
+.content-left .border_i a{color:#2B2B2B;float: right;display: inline-block;background: gray;border:1px solid gray;padding: 10px;border-radius: 5px;clear: both;}
+.content-left .border_i a:hover {background: black;color:#8B0000;}
+#searchinner{padding: 7% 0%;}

@@ -1,0 +1,56 @@
+<style type="text" id="commentList">
+	<div class="panel panel-success commentList">
+		<div class="panel-heading">评论列表
+		</div>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>评论者</th>
+					<th>评论内容</th>
+					<th>评论的文章</th>
+					<th>评论时间</th>
+					<th>删除</th>
+				</tr>
+			</thead>
+			<tbody>
+				<%comments.forEach(function(comm){%>
+					<tr>
+						<td>
+							<%= comm.cid%>
+						</td>
+						<td>
+							<%= comm.cname%>
+						</td>
+						<td>
+							<%= comm.ccontent %>
+						</td>
+						<td>
+							<%= comm.title %>
+						</td>
+						<td>
+							<%= comm.time %>
+						</td>
+						<td><span class="glyphicon glyphicon-trash" cid="<%= comm.cid %>"></span></td>
+						
+					</tr>
+					<%})%>
+			</tbody>
+		</table>
+	</div>
+<script type="text/javascript">
+	$(function(){
+	
+	$("#adminMain .commentList .glyphicon-trash").click(function(){
+		M.commentDel({"cid":$(this).attr("cid")}).done(function(obj){
+			if(obj.code){
+				M.commentList();
+			}else{
+				$.modal("提示","删除失败");
+			}
+		});
+	});
+})
+
+</script>
+</style>

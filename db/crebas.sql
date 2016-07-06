@@ -37,8 +37,25 @@ create table news
    admin_id             int,
    addtime              datetime,
    typeid               int,
+   readCount            int,
    primary key (nid)
 );
+
+drop table if exists comment;
+
+/*==============================================================*/
+/* Table: comment                                               */
+/*==============================================================*/
+create table comment
+(
+   cid                int not null auto_increment,
+   cname                varchar(50),
+   ccontent             text,
+   nid                  int,
+   parent_cid           int
+   primary key (cid)
+);
+
 
 /*==============================================================*/
 /* Table: type                                                  */
@@ -59,7 +76,7 @@ drop table if exists photos;
 /*==============================================================*/
 create table photos
 (
-   pid                  int not null,
+   pid                  int not null auto_increment,
    pname                varchar(50),
    paddtime             datetime,
    primary key (pid)
@@ -73,7 +90,7 @@ drop table if exists images;
 /*==============================================================*/
 create table images
 (
-   imgid                int not null,
+   imgid                int not null auto_increment,
    imgname              varchar(500),
    imgurl               varchar(100),
    addtime              datetime,

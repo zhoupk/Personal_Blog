@@ -8,7 +8,9 @@
 				<tr>
 					<th>#</th>
 					<th>用户名</th>
+					<th>密码</th>
 					<th>超级管理员</th>
+					
 					<th>修改</th>
 					<th>删除</th>
 				</tr>
@@ -16,17 +18,27 @@
 			<tbody>
 				<%users.forEach(function(user){%>
 					<tr>
-						<td>
+						<th>
 							<%= user.admin_id%>
-						</td>
+						</th>
 						<td>
 							<%= user.admin_name%>
 						</td>
 						<td>
-							<%= (user.admin_issuper ? '是' : '否')%>
+							<%= user.admin_password%>
 						</td>
-						<td><span class="glyphicon glyphicon-pencil" updateid="<%= user.admin_id %>"></span></td>
-						<td><span class="glyphicon glyphicon-trash" uid="<%= user.admin_id %>"></span></td>
+						<th>
+							<%= (user.admin_issuper ? '是' : '否')%>
+						</th>
+						<th><span class="glyphicon glyphicon-pencil" ></span>
+							<div style="display: none;">
+								<button class="yes" updateid="<%= user.admin_id %>">确认</button>
+								<button class="no">取消</button>
+							</div>
+						</th>
+						<th>
+							<span class="glyphicon glyphicon-trash" uid="<%= user.admin_id %>"></span>
+						</th>
 						
 					</tr>
 					<%})%>
@@ -35,12 +47,27 @@
 	</div>
 <script type="text/javascript">
 	$(function(){
+		
 	$("#adminMain .adminList .glyphicon-plus").click(function(){
 		var html = ejs.render($("#addAdminer").html());
 		$.pageChange(html);
 		
 	});
-	
+	$.pencil();
+	$("#adminMain .adminList .yes").click(function(){
+		M.adminUpdate({updateid:$(this).attr("updateid"),uname:$("input[name=td0]").val(),upassword:$("input[name=td1]").val()}).done(function(obj){
+			if(obj.code){
+				$.modal("提示","修改成功");
+				M.adminList();
+			}else{
+				$.modal("提示","修改失败");
+			}
+		});
+		
+	});
+	$("#adminMain .adminList .no").click(function(){
+		M.adminList();
+	})
 	$("#adminMain .adminList .glyphicon-trash").click(function(){
 		M.adminDel({"uid":$(this).attr("uid")}).done(function(obj){
 			if(obj.code){
@@ -51,9 +78,7 @@
 		});
 	});
 	
-	$("#adminMain .adminList .glyphicon-pencil").click(function(){
-		M.adminUpdatelist({"updateid":$(this).attr("updateid")});
-	});
+	
 })
 
 </script>

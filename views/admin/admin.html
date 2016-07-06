@@ -67,12 +67,13 @@
 
 				<div class="col-xs-6 col-sm-3 sidebar-offcanvas" role="navigation">
 					<ul class="list-group panel">
-						<li class="list-group-item list-group-item-success"><i class="glyphicon glyphicon-align-justify"></i> <b>后台管理</b></li>
-						<li class="list-group-item "><a href="#" data-router="adminList"><i class="glyphicon glyphicon-user "></i> <b>用户管理</b></a></li>
-						<li class="list-group-item "><a href="#" data-router="newtypeList"><i class="glyphicon glyphicon-th-list"></i> <b>资讯分类</b></a></li>
-						<li class="list-group-item "><a href="#" data-router="newsList"><i class="glyphicon glyphicon-book"></i> <b>资讯管理</b></a></li>
-						<li class="list-group-item "><i class="glyphicon glyphicon-th"></i> <b>相册管理</b></li>
-						<li class="list-group-item "><a href="#" data-router="imgaddList"><i class="glyphicon glyphicon-picture"></i> <b>图片管理</b></a></li>
+						<li class="list-group-item list-group-item-primary"><i class="glyphicon glyphicon-align-justify"></i> <b style="color: white;">后台管理</b></li>
+						<li class="list-group-item "><a href="javascript:void(0);" data-router="adminList"><i class="glyphicon glyphicon-user "></i> <b>用户管理</b></a></li>
+						<li class="list-group-item "><a href="javascript:void(0);" data-router="newtypeList"><i class="glyphicon glyphicon-th-list"></i> <b>资讯分类</b></a></li>
+						<li class="list-group-item "><a href="javascript:void(0);" data-router="newsList"><i class="glyphicon glyphicon-book"></i> <b>资讯管理</b></a></li>
+						<li class="list-group-item "><a href="javascript:void(0);" data-router="photoList"><i class="glyphicon glyphicon-th"></i> <b>相册管理</b></a></li>
+						<li class="list-group-item "><a href="javascript:void(0);" data-router="imgList"><i class="glyphicon glyphicon-picture"></i> <b>图片管理</b></a></li>
+						<li class="list-group-item "><a href="javascript:void(0);" data-router="commentList"><i class="glyphicon glyphicon-comment"></i> <b>评论管理</b></a></li>
 					</ul>
 				</div>
 
@@ -113,7 +114,11 @@
 		<$- include newsList.html -$>
 		<$- include newAdd.html -$>
 		<$- include imgAdd.html -$>
-		<$- include adminUpdate.html -$>
+		<$- include photoAdd.html -$>
+		<$- include imgList.html-$>
+		<$- include photoList.html -$>
+			<$- include commentList.html -$>
+				
 	</body>
 
 </html>

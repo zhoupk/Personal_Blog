@@ -9,7 +9,8 @@
 					<th>作者</th>
 					<th>类型</th>
 					<th>加入时间</th>
-					<th>操作</th>
+					<th>修改</th>
+					<th>删除</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -30,7 +31,8 @@
 						<td>
 							<%= newsItem.addtime%>
 						</td>
-						<td><span class="glyphicon glyphicon glyphicon-trash" nid="<%= newsItem.nid%>"></span></td>
+						<td><span class="glyphicon glyphicon-pencil" updateid="<%= newsItem.nid %>"></span></td>
+						<td><span class="glyphicon glyphicon-trash" nid="<%= newsItem.nid%>"></span></td>
 					</tr>
 					<%})%>
 			</tbody>
@@ -50,13 +52,15 @@
 	
 	<script type="text/javascript">
 	$(function(){
+	/*$("#adminMain .newsList .glyphicon-pencil").click(function(){
+		M.newsUpdatelist({updateid:$(this).attr("updateid")});
+	});*/
 	$("#adminMain .newsList .glyphicon-plus").click(function(){
 		M.getType().done(function(types){
 			var html = ejs.render($("#newAdd").html(),{types:types});
 		$.pageChange(html);
 		});
 	});
-	
 	$("#adminMain .newsList .glyphicon-trash").click(function(){
 		M.newDel({"nid":$(this).attr("nid")}).done(function(obj){
 			if(obj.code){

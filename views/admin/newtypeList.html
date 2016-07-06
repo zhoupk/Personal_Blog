@@ -7,27 +7,29 @@
 					<th>#</th>
 					<th>分类名称</th>
 					<th>父节点</th>
-					<th>排序</th>
-					<th>操作</th>
+					<th>修改</th>
+					<th>删除</th>
 				</tr>
 			</thead>
 			<tbody>
-				<%type.forEach(function(type){%>
-					<tr>
+				<% type.forEach(function(tp){%>
+					<tr class="tr"+i>
+						<th>
+							<%= tp.typeid%>
+						</th>
 						<td>
-							<%= type.typeid%>
+							<%= tp.typename%>
 						</td>
 						<td>
-							<%= type.typename%>
+							<%= tp.parent_typeid%>
 						</td>
-						<td>
-							<%= type.parent_typeid%>
-						</td>
-						<td>
-							<%= type.typeorder%>
-						
-						</td>
-						<td><span class="glyphicon glyphicon-trash" tid="<%= type.typeid%>"></span></td>
+						<th><span class="glyphicon glyphicon-pencil"></span>
+						<div style="display: none;">
+								<button class="yes" updateid="<%= tp.typeid %>">确认</button>
+								<button class="no">取消</button>
+							</div>
+							</td>
+						<th><span class="glyphicon glyphicon-trash" tid="<%= tp.typeid%>"></span></td>
 					</tr>
 					<%})%>
 			</tbody>
@@ -41,7 +43,21 @@
 		$.pageChange(html);
 		
 	});
-	
+	$.pencil();
+	$("#adminMain .newtypeList .yes").click(function(){
+		M.newtypeUpdate({updateid:$(this).attr("updateid"),ptype:$("input[name=td0]").val(),parentid:$("input[name=td1]").val()}).done(function(obj){
+			if(obj.code){
+				$.modal("提示","修改成功");
+				M.newtypeList();
+			}else{
+				$.modal("提示","修改失败");
+			}
+		});
+		
+	});
+	$("#adminMain .newtypeList .no").click(function(){
+		M.newtypeList();
+	});
 	$("#adminMain .newtypeList .glyphicon-trash").click(function(){
 		M.newtypeDel({"tid":$(this).attr("tid")}).done(function(obj){if(obj.code){
 				M.newtypeList();

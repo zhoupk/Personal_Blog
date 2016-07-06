@@ -52,6 +52,7 @@ exports.createPage_byGet=function(req,res,next){
 exports.upfile=function(req,res,next){
 	console.log(req.file);
 	var extname=path.extname(req.file.originalname);
+	var imgurl="/upfile/"+new Date().getTime()+extname;
 	var frpath= global.rootPath+"/"+req.file.path;
 	var fopath=global.rootPath+"/public/upfile/"+new Date().getTime()+extname;
 	var fr=fs.createReadStream(frpath);
@@ -62,6 +63,17 @@ exports.upfile=function(req,res,next){
 			return next(err);
 		}
 	});
+	
+	pictureModule.insert(new Date().getTime()+extname,imgurl,req.body.pid).on("success",function(results,fields){
+		if(results.insertId){
+			res.json(info.message.success);
+		}else{
+			res.json(info.error.imagesAddError);
+		}	
+	}).on("error",function(err){
+		return next(err);
+	});
+
 };
 
 exports.htmloption_del=function(str){

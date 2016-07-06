@@ -5,127 +5,165 @@
 		<meta charset="UTF-8">
 		<title></title>
 		<script src="/js/site.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/js/ejs.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/js/cheack.js" type="text/javascript" charset="utf-8"></script>
 		<link rel="stylesheet" type="text/css" href="/css/public.css" />
 		<link rel="stylesheet" type="text/css" href="/css/index.css" />
 		<link rel="stylesheet" type="text/css" href="/css/jquery.ad-gallery.css" />
 		<link rel="stylesheet" type="text/css" href="/css/site.min.css" />
 		<style type="text/css">
-			.type{margin-top: 3%;}
-			.type .p1style{background: #CDCDB4;padding: 2%;border: 1px solid gray;border-radius: 5%;text-align: center;width: 50%;}
-			.p2style{width: 200%;}
+			.type {
+				margin-top: 3%;
+			}
+			
+			.type .p1style {
+				background: #CDCDB4;
+				padding: 2%;
+				border: 1px solid gray;
+				border-radius: 5%;
+				text-align: center;
+				width: 50%;
+			}
+			
+			.p2style {
+				width: 200%;
+			}
+			
 			.content-left p span {
 				padding-right: 2%;
 			}
 		</style>
+		<script type="text/javascript">
+			$(function(){
+				M.searchinner();
+				M.hotlistinner();
+			})
+		</script>
 	</head>
 
 	<body>
 		<div class="container">
-			
-		
-		<header>
-			<div class="quotes">
-				<p>在寻求真理的长河中，唯有学习，不断地学习，勤奋地学习，有创造性地学习，才能越重山跨峻岭。
-					<br /><span style="padding-left: 75%;"> —— 华罗庚</span></p>
-				<div class="text5">技术之路</div>
-				<!--<div class="flower"><img src="/img/flower.jpg"></div>-->
-			</div>
-			<!--nav begin-->
-			<nav class="navbar bgcolor" role="navigation">
-				<div class="container-fluid">
-					<!-- Brand and toggle get grouped for better mobile display -->
-					<div class="navbar-header bgcolor">
-						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-content-row-navbar-collapse-1">
-							<span class="sr-only">Toggle navigation</span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-						</button>
-					</div>
-					<!-- Collect the nav links, forms, and other content for toggling -->
-					<div class="collapse navbar-collapse" id="bs-content-row-navbar-collapse-1">
-						<ul class="nav navbar-nav navbar-right">
-							<li><a href="/">首页</a></li>
-							<li><a href="#">关于我</a></li>
-							<li class="list"><a href="/html/qian?curPage=1">前端</a>
-							</li>
-							<li class="list"><a href="/html/hou?curPage=1">后端</a>
-							</li>
-							<li><a href="#">学习视频</a></li>
-							<li><a href="#">相册</a></li>
-							<li><a href="#">留言板</a></li>
-						</ul>
-					</div>
-					<!-- /.navbar-collapse -->
+
+			<header>
+				<div class="quotes">
+					<p>在寻求真理的长河中，唯有学习，不断地学习，勤奋地学习，有创造性地学习，才能越重山跨峻岭。
+						<br /><span style="padding-left: 75%;"> —— 华罗庚</span></p>
+					<div class="text5">技术之路</div>
+					<!--<div class="flower"><img src="/img/flower.jpg"></div>-->
 				</div>
-				<!-- /.container-fluid -->
-			</nav>
-			<!--nav end-->
-		</header>
+				<!--nav begin-->
+				<nav class="navbar bgcolor" role="navigation">
+					<div class="container-fluid">
+						<!-- Brand and toggle get grouped for better mobile display -->
+						<div class="navbar-header bgcolor">
+							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-content-row-navbar-collapse-1">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</button>
+						</div>
+						<!-- Collect the nav links, forms, and other content for toggling -->
+						<div class="collapse navbar-collapse" id="bs-content-row-navbar-collapse-1">
+							<ul class="nav navbar-nav navbar-right">
+								<li><a href="/">首页</a></li>
+								<li><a href="#">关于我</a></li>
+								<li class="list"><a href="/html/qian?curPage=1">前端</a>
+								</li>
+								<li class="list"><a href="/html/hou?curPage=1">后端</a>
+								</li>
+								<li><a href="/html/photo">相册</a></li>
+								<li><a href="#">留言板</a></li>
+								<li><a href="/login.html">后台入口</a></li>
+							</ul>
+						</div>
+						<!-- /.navbar-collapse -->
+					</div>
+					<!-- /.container-fluid -->
+				</nav>
+				<!--nav end-->
+			</header>
 		</div>
-		
-			
-			
-			<div class="type container">
+
+		<div class="type container">
 			<$ pages.typedata.forEach(function(content){ $>
 				<div class="col-sm-3 hidden-xs">
-						<p class="p1style"><a href="/html/<$= pages.data[0].ptype==0?'qian':'hou' $>/type?type=<$= content.typename $>" ><$= content.typename $></a></p>
+					<p class="p1style">
+						<a href="/html/<$= pages.data[0].ptype==0?'qian':'hou' $>/type?type=<$= content.typename $>">
+							<$= content.typename $>
+						</a>
+					</p>
 				</div>
-				
+
 				<div class="col-xs-6 visible-xs">
-						<p class="p1style p2style"><a href="/html/<$= pages.data[0].ptype==0?'qian':'hou' $>/type?type=<$= content.typename $>" ><$= content.typename $></a></p>
+					<p class="p1style p2style">
+						<a href="/html/<$= pages.data[0].ptype==0?'qian':'hou' $>/type?type=<$= content.typename $>">
+							<$= content.typename $>
+						</a>
+					</p>
 				</div>
 				<$ }) $>
 		</div>
-			<div class="container">
+		<div class="container">
 			<div class="row">
 				<div class="col-sm-9 col-xs-12 content-left">
-					<$ pages.data.forEach(function(page){ $>
-						<div class="hidden-xs">
+					<div class="hidden-xs">
+						<$ pages.data.forEach(function(page){ $>
 							<div>
 								<h5><$= page.title $></h5>
 								<p><span>发布时间:<$= page.time $></span>&nbsp;<span>作者:<$= page.aname $></span>&nbsp;<span>类型:<$= page.ptype==0?'前端/':'后端/' $><$= page.tname $></span></p>
 								<$- page.content $>
-									<a href="/html/<$= pages.data[0].ptype==0?'qian':'hou' $>/archive?nid=<$= page.nid $>">阅读全文>></a>
+
+							</div>
+							<div class="border_i"><a href="/html/<$= pages.data[0].ptype==0?'qian':'hou' $>/archive?nid=<$= page.nid $>">阅读全文>></a></div>
+
+							<$ }) $>
+					</div>
+
+					<div class="visible-xs">
+						<$ pages.data.forEach(function(content){ $>
+							<div>
+								<h5><$= content.title $></h5>
+								<p><span>发布时间:<$= content.time $></span>&nbsp;<span>作者:<$= content.aname $></span>&nbsp;<span>类型:<$= content.ptype==0?'前端/':'后端/' $><$= content.tname $></span></p>
+								<a href="/html/<$= pages.data[0].ptype==0?'qian':'hou' $>/archive?nid=<$= content.nid $>" style="float: left;">阅读全文>></a>
 							</div>
 							<div class="border_i"></div>
-						</div>
-						<$ }) $>
-
-							<$ pages.data.forEach(function(content){ $>
-								<div class="visible-xs">
-									<div>
-										<h5><$= content.title $></h5>
-										<p><span>发布时间:<$= content.time $></span>&nbsp;<span>作者:<$= content.aname $></span>&nbsp;<span>类型:<$= content.ptype==0?'前端/':'后端/' $><$= content.tname $></span></p>
-										<a href="/html/<$= pages.data[0].ptype==0?'qian':'hou' $>/archive?nid=<$= content.nid $>" style="float: left;">阅读全文>></a>
-									</div>
-									<div class="border_i"></div>
-								</div>
-								<$})$>
+							<$})$>
+					</div>
 
 				</div>
-				
-				
-	</div>
-			<nav>
-			<ul class="pagination">
-				<li class="<$= parseInt(pages.curPage)==1?'disabled':'active' $>"><a href="/html/<$= pages.data[0].ptype==0?'qian':'hou' $>?curPage=<$= parseInt(pages.curPage)-1<=0?1:parseInt(pages.curPage)-1 $>">PREV</a></li>
-				<$ for(var i=1;i<=pages.totalPage;i++){ $>
-					<li class="<$= pages.curPage==i?'active':'' $>">
-						<a href="/html/<$= pages.data[0].ptype==0?'qian':'hou' $>?curPage=<$= i $>">
-							<$=i $>
-						</a>
-					</li>
-					<$ } $>
-						<li class="<$= parseInt(pages.curPage)==pages.totalPage?'disabled':'active' $>"><a href="/html/<$= pages.data[0].ptype==0?'qian':'hou' $>?curPage=<$= parseInt(pages.curPage)+1>=pages.totalPage?pages.totalPage:parseInt(pages.curPage)+1 $>">NEXT</a></li>
-			</ul>
-		</nav>
-		
-			
-		
-		
-		<div class="col-sm-3"></div>
+				<div class="col-sm-3">
+
+					<div id="searchinner">	
+					</div>
+					<div id="hotcontent">
+					</div>
+
+				</div>
+
+			</div>
+
+			<div class="row">
+				<nav>
+					<ul class="pagination">
+						<li class="<$= parseInt(pages.curPage)==1?'disabled':'active' $>"><a href="/html/<$= pages.data[0].ptype==0?'qian':'hou' $>?curPage=<$= parseInt(pages.curPage)-1<=0?1:parseInt(pages.curPage)-1 $>">PREV</a></li>
+						<$ for(var i=1;i<=pages.totalPage;i++){ $>
+							<li class="<$= pages.curPage==i?'active':'' $>">
+								<a href="/html/<$= pages.data[0].ptype==0?'qian':'hou' $>?curPage=<$= i $>">
+									<$=i $>
+								</a>
+							</li>
+							<$ } $>
+								<li class="<$= parseInt(pages.curPage)==pages.totalPage?'disabled':'active' $>"><a href="/html/<$= pages.data[0].ptype==0?'qian':'hou' $>?curPage=<$= parseInt(pages.curPage)+1>=pages.totalPage?pages.totalPage:parseInt(pages.curPage)+1 $>">NEXT</a></li>
+					</ul>
+				</nav>
+			</div>
+<div class="container" id="bottomsy">
+					<p>Powered by dedecms Copyright &copy; 2016 www.xxx.com All rights reserved. </p>
+				</div>
 		</div>
+		<$- include searchmodel.html-$>
+	<$- include hotlist.html -$>
 	</body>
 
 </html>

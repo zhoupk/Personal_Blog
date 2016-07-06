@@ -1,5 +1,4 @@
 //引入第三方模块
-
 var express=require("express");
 var bodyparser=require("body-parser");
 var session = require("express-session");
@@ -8,6 +7,7 @@ var path=require("path");
 var events=require("events");
 var log4js=require("log4js");
 var ejs=require("ejs");
+var captchapng = require("captchapng");
 var wechat=require("wechat");
 var multer=require("multer");
 var trimhtml=require("trim-html");
@@ -19,6 +19,7 @@ global.events=events;
 global.rootPath=__dirname;
 global.wechat=wechat;
 global.trimhtml=trimhtml;
+global.captchapng=captchapng;
 
 
 //引入自定义模块
@@ -28,6 +29,7 @@ global.info=util.loadConfig("info");//错误配置信息
 
 var loginRouter=require("./router/loginRouter.js");
 var adminRouter=require("./router/adminRouter.js");
+var pictureRouter=require("./router/pictureRouter.js");
 var newtypeRouter=require("./router/newtypeRouter.js");
 var apiRouter=require("./router/apiRouter.js");
 var htmlRouter=require("./router/htmlRouter.js");
@@ -35,7 +37,8 @@ var wechatmodule=require("./router/wechat.js");
 
 global.dataSource=require("./model/dataSource.js")(); //数据库连接
 global.adminModule=require("./model/adminModule.js")(); //管理员数据库语句的执行
-global.newtypeModule=require("./model/newtypeModule.js")();//博文类型数据库语句的执行-----dataSource+adminMoudle+adminRouter=操作数据库并返回成功与否结果
+global.newtypeModule=require("./model/newtypeModule.js")();
+global.pictureModule=require("./model/pictureModule.js")();//博文类型数据库语句的执行-----dataSource+adminMoudle+adminRouter=操作数据库并返回成功与否结果
 //加载日志配置文件
 log4js.configure("config/log4js.json");
 
@@ -75,6 +78,7 @@ app.use("/login",loginRouter);
 app.use("/admin",util.islogin);
 app.use("/admin/admin",adminRouter);
 app.use("/admin/news",newtypeRouter);
+app.use("/admin/picture",pictureRouter);
 app.use("/html",htmlRouter);
 //手机，App接口路由
 app.use("/API",apiRouter);
@@ -87,7 +91,7 @@ app.post('/upfiles', upload.single('upfile'),util.upfile);//upload.single('upfil
 //设置首页
 app.get("/", function(req,res,next){
 	newtypeModule.newsList_order_time(0,0,4).on("success",function(results,fields){
-		res.render("index/index.html",{contents:results});
+		res.render("html/index.html",{contents:results});
 	}).on("error",function(err){
 		return next(err);
 	});
@@ -131,5 +135,3 @@ var server = app.listen(80, function () {
 
 
 
-//public是静态文件夹,放在静态文件夹中的文件是客户端可以直接访问,比如window.location.href="/login.html"可以跳转到login页面
-//而admin.html不在静态文件夹中,window.location.href="/views/admin/admin.html"是找不到页面的,必须通过服务器端渲染返回客户端。

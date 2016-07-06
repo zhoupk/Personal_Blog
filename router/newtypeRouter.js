@@ -8,7 +8,24 @@ router.post("/newtypeList",function(req,res,next){
 		return next(err);
 	});
 });
-
+router.post("/commentList",function(req,res,next){
+	newtypeModule.commentlist(0).on("success",function(results,fields){
+		res.json(results);
+	}).on("error",function(err){
+		return next(err);
+	});
+});
+router.post("/commentDel",function(req,res,next){
+	newtypeModule.del(req.body.cid,2).on("success",function(results,fields){
+		if(results.affectedRows==1){
+			res.json(info.message.success);
+		}else{
+			res.json(info.error.adminDelError);
+		}	
+	}).on("error",function(err){
+		return next(err);
+	});
+});
 router.post("/newtypeAdd",function(req,res,next){
 	newtypeModule.insert(req.body.tname,req.body.parent_typeid).on("success",function(results,fields){
 		if(results.insertId){
@@ -21,7 +38,19 @@ router.post("/newtypeAdd",function(req,res,next){
 	});
 });	
 router.post("/newtypeDel",function(req,res,next){
-	newtypeModule.del(req.body.tid).on("success",function(results,fields){
+	newtypeModule.del(req.body.tid,0).on("success",function(results,fields){
+		if(results.affectedRows==1){
+			res.json(info.message.success);
+		}else{
+			res.json(info.error.adminDelError);
+		}	
+	}).on("error",function(err){
+		return next(err);
+	});
+});
+
+router.post("/newDel",function(req,res,next){
+	newtypeModule.del(req.body.nid,1).on("success",function(results,fields){
 		if(results.affectedRows==1){
 			res.json(info.message.success);
 		}else{
@@ -53,5 +82,21 @@ router.post("/newAdd",function(req,res,next){
 		return next(err);
 	});
 });	
+
+//router.post("/newUpdatelist",function(req,res,next){
+//	newtypeModule.getNewsByNid(req.body.updateid).on("success",function(results,fields){
+//			res.json(results);
+//	}).on("error",function(err){
+//		return next(err);
+//	});
+//});	
+
+router.post("/newtypeUpdate",function(req,res,next){
+	newtypeModule.newtypeUpdate(req.body.updateid,req.body.ptype,req.body.parentid).on("success",function(results,fields){
+			res.json(info.message.success);
+	}).on("error",function(err){
+		return next(err);
+	});
+});
 
 module.exports=router;

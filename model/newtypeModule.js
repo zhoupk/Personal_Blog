@@ -9,6 +9,7 @@ newtypeModule.prototype.newtypeList=function(){
 			}
 			
 			emitter.emit("success",results,fields);
+			connection.release();
 		}).on("error",function(err){
 			emitter.emit("error",err);
 			connection.release();
@@ -27,6 +28,7 @@ newtypeModule.prototype.insert=function(tname,parent_typeid){
 				return emitter.emit("error",err);
 			}
 			emitter.emit("success",results,fields);
+			connection.release();
 		}).on("error",function(err){
 			emitter.emit("error",err);
 			connection.release();
@@ -36,14 +38,24 @@ newtypeModule.prototype.insert=function(tname,parent_typeid){
 	return emitter;
 };
 
-newtypeModule.prototype.del=function(tid){
+newtypeModule.prototype.del=function(id,n){
 	var emitter=new events.EventEmitter();
+	
 	dataSource.getcon().on("success",function(connection){
-		connection.query('delete from type where typeid=?',[tid],function(err,results,fields){
+		var sql;
+		if(n==0){
+			sql='delete from type where typeid=?';
+		}else if(n==1){
+			sql='delete from news where nid=?';
+		}else if(n==2){
+			sql='delete from comment where cid=?'
+		}
+		connection.query(sql,[id],function(err,results,fields){
 			if(err){
 				return emitter.emit("error",err);
 			}
 			emitter.emit("success",results,fields);
+			connection.release();
 		}).on("error",function(err){
 			emitter.emit("error",err);
 			connection.release();
@@ -52,6 +64,8 @@ newtypeModule.prototype.del=function(tid){
 	});
 	return emitter;
 };
+
+
 
 newtypeModule.prototype.newsList=function(Star,pageCount){
 	var emitter=new events.EventEmitter();
@@ -64,6 +78,7 @@ newtypeModule.prototype.newsList=function(Star,pageCount){
 				return emitter.emit("error",err);
 			}
 			emitter.emit("success",results,fields);
+			connection.release();
 		}).on("error",function(err){
 			emitter.emit("error",err);
 			connection.release();
@@ -102,6 +117,7 @@ newtypeModule.prototype.newsList_order_time=function(flag,Star,pageCount){
 				
 			}
 			emitter.emit("success",results,fields);
+			connection.release();
 		}).on("error",function(err){
 			emitter.emit("error",err);
 			connection.release();
@@ -110,6 +126,73 @@ newtypeModule.prototype.newsList_order_time=function(flag,Star,pageCount){
 	});
 	return emitter;
 };
+newtypeModule.prototype.newsList_hotlist=function(){
+	var emitter=new events.EventEmitter();
+	dataSource.getcon().on("success",function(connection){ 
+		var sql="select n.nid,n.title,n.readCount,t.parent_typeid from news n,type t where n.typeid=t.typeid order by readCount desc limit 0,6";
+		connection.query(sql,function(err,results,fields){
+			if(err){
+				return emitter.emit("error",err);
+			}
+			emitter.emit("success",results,fields);
+			connection.release();
+		}).on("error",function(err){
+			emitter.emit("error",err);
+			connection.release();
+		});
+		return emitter;
+	});
+	return emitter;
+};
+
+newtypeModule.prototype.commentAdd=function(cname,ccontent,nid,parent_id){
+	var emitter=new events.EventEmitter();
+	dataSource.getcon().on("success",function(connection){ 
+		var sql="insert into comment values(default,?,?,?,?,now())";
+		connection.query(sql,[cname,ccontent,nid,parent_id],function(err,results,fields){
+			if(err){
+				return emitter.emit("error",err);
+			}
+			emitter.emit("success",results,fields);
+			connection.release();
+		}).on("error",function(err){
+			emitter.emit("error",err);
+			connection.release();
+		});
+		return emitter;
+	});
+	return emitter;
+};
+newtypeModule.prototype.commentlist=function(flag,nid){
+	var emitter=new events.EventEmitter();
+	dataSource.getcon().on("success",function(connection){
+		var sql;
+		if(flag==0){
+			sql="select c.*,substring(c.caddtime,1,20) as time,n.title,n.nid from comment c,news n where c.nid=n.nid";
+		}else if(flag==1){
+			sql="select *,substring(caddtime,1,20) as time from comment where nid=?";
+
+		}else if(flag==2){
+			sql="select n.title,n.nid from comment c,news n where c.nid=n.nid group by c.nid";
+		}
+		
+		connection.query(sql,[nid],function(err,results,fields){
+			if(err){
+				return emitter.emit("error",err);
+			}
+			emitter.emit("success",results,fields);
+			connection.release();
+		}).on("error",function(err){
+			emitter.emit("error",err);
+			connection.release();
+		});
+		return emitter;
+	});
+	return emitter;
+};
+
+
+
 
 newtypeModule.prototype.newsList_byTypename=function(flag,type){
 	var emitter=new events.EventEmitter();
@@ -130,6 +213,7 @@ newtypeModule.prototype.newsList_byTypename=function(flag,type){
 					}
 			}
 			emitter.emit("success",results,fields);
+			connection.release();
 		}).on("error",function(err){
 			emitter.emit("error",err);
 			connection.release();
@@ -137,16 +221,50 @@ newtypeModule.prototype.newsList_byTypename=function(flag,type){
 		return emitter;
 	});
 	return emitter;
-};		
+};
+
+
+
 newtypeModule.prototype.newsList_byNid=function(nid){
 	var emitter=new events.EventEmitter();
 	dataSource.getcon().on("success",function(connection){
 		var sql_nid="select n.*,a.admin_name as aname,t.typename as tname,t.parent_typeid as ptype,substring(n.addtime,1,20) as time from news n,admin a,type t where n.admin_id=a.admin_id and n.typeid=t.typeid and n.nid=?";
-		connection.query(sql_nid,[nid],function(err,results,fields){
+		var sql_readCout_add="update news set readCount=readCount+1 where nid=?";
+		var sql=sql_nid+";"+sql_readCout_add;
+		connection.query(sql,[nid,nid],function(err,results,fields){
 			if(err){
 				return emitter.emit("error",err);
 			}
+			
 			emitter.emit("success",results,fields);
+			connection.release();
+		}).on("error",function(err){
+			emitter.emit("error",err);
+			connection.release();
+		});
+		return emitter;
+	});
+	return emitter;
+};
+
+newtypeModule.prototype.newsList_byTitle=function(flag,title){
+	var emitter=new events.EventEmitter();
+	dataSource.getcon().on("success",function(connection){
+		var sql_title="select n.*,a.admin_name as aname,t.typename as tname,t.parent_typeid as ptype,substring(n.addtime,1,20) as time from news n,admin a,type t where n.admin_id=a.admin_id and n.typeid=t.typeid and n.title like ? ";
+		connection.query(sql_title,["%"+title+"%"],function(err,results,fields){
+			if(err){
+				return emitter.emit("error",err);
+			}
+			if(flag==0){
+						for(var i=0;i<results.length;i++){
+						var trimed=trimhtml(results[i].content,{limit:130});
+						strre=trimed.html;
+						results[i].content=strre;
+					}
+			}
+			
+			emitter.emit("success",results,fields);
+			connection.release();
 		}).on("error",function(err){
 			emitter.emit("error",err);
 			connection.release();
@@ -159,11 +277,12 @@ newtypeModule.prototype.newsList_byNid=function(nid){
 newtypeModule.prototype.newInsert=function(title,content,aid,typeid){
 	var emitter=new events.EventEmitter();
 	dataSource.getcon().on("success",function(connection){
-		connection.query('insert into news values(default,?,?,?,now(),?)',[title,content,aid,typeid],function(err,results,fields){
+		connection.query('insert into news values(default,?,?,?,now(),?,0)',[title,content,aid,typeid],function(err,results,fields){
 			if(err){
 				return emitter.emit("error",err);
 			}
 			emitter.emit("success",results,fields);
+			connection.release();
 		}).on("error",function(err){
 			emitter.emit("error",err);
 			connection.release();
@@ -181,6 +300,7 @@ newtypeModule.prototype.getNewsByTid=function(tid){
 				return emitter.emit("error",err);
 			}
 			emitter.emit("success",results,fields);
+			connection.release();
 		}).on("error",function(err){
 			emitter.emit("error",err);
 			connection.release();
@@ -193,11 +313,12 @@ newtypeModule.prototype.getNewsByTid=function(tid){
 newtypeModule.prototype.getNewsByNid=function(nid){
 	var emitter=new events.EventEmitter();
 	dataSource.getcon().on("success",function(connection){
-		connection.query('select * from news where nid=?',[nid],function(err,results,fields){
+		connection.query('select n.*,t.typename from news n,type t where n.typeid=t.typeid and nid=?',[nid],function(err,results,fields){
 			if(err){
 				return emitter.emit("error",err);
 			}
 			emitter.emit("success",results,fields);
+			connection.release();
 		}).on("error",function(err){
 			emitter.emit("error",err);
 			connection.release();
@@ -206,6 +327,25 @@ newtypeModule.prototype.getNewsByNid=function(nid){
 	});
 	return emitter;
 };
+
+newtypeModule.prototype.newtypeUpdate=function(tid,ptype,parentid){
+	var emitter=new events.EventEmitter();
+	dataSource.getcon().on("success",function(connection){
+		connection.query('update type set typename=?,parent_typeid=? where typeid=?',[ptype,parentid,tid],function(err,results,fields){
+			if(err){
+				return emitter.emit("error",err);
+			}
+			emitter.emit("success",results,fields);
+			connection.release();
+		}).on("error",function(err){
+			emitter.emit("error",err);
+			connection.release();
+		});
+		return emitter;
+	});
+	return emitter;
+};
+
 
 module.exports=function(){
 	return new newtypeModule();

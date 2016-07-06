@@ -3,27 +3,32 @@
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
+		
+		
 		<script src="/js/site.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="/js/ejs.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="/js/cheack.js" type="text/javascript" charset="utf-8"></script>
-		<link rel="stylesheet" type="text/css" href="/css/index.css" />
+		<script type="text/javascript" src="/js/datouwang.js"></script>
+        <link rel="stylesheet" type="text/css" href="/css/index.css" />
 		<link rel="stylesheet" type="text/css" href="/css/public.css" />
 		<link rel="stylesheet" type="text/css" href="/css/jquery.ad-gallery.css" />
 		<link rel="stylesheet" type="text/css" href="/css/site.min.css" />
+		<link rel="stylesheet" type="text/css"  href="/css/datouwang.css"/>
 	</head>
+	
 	<body>
-		<div class="container">
-
-			<header>
+		<!--<div class="container">-->
+				<div class="container">
+          			<header>
 				<div class="quotes">
 					<p>在寻求真理的长河中，唯有学习，不断地学习，勤奋地学习，有创造性地学习，才能越重山跨峻岭。
 						<br /><span style="padding-left: 75%;"> —— 华罗庚</span></p>
 					<div class="text5">技术之路</div>
-					<!--<div class="flower"><img src="/img/flower.jpg"></div>-->
+					
 				</div>
 				<!--nav begin-->
 				<nav class="navbar bgcolor" role="navigation">
-					<div>
+					<div class="container">
 						<!-- Brand and toggle get grouped for better mobile display -->
 						<div class="navbar-header bgcolor">
 							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-content-row-navbar-collapse-1">
@@ -42,6 +47,7 @@
 								</li>
 								<li class="list"><a href="/html/hou?curPage=1">后端</a>
 								</li>
+								
 								<li><a href="/html/photo">相册</a></li>
 								<li><a href="#">留言板</a></li>
 								<li><a href="/login.html">后台入口</a></li>
@@ -54,31 +60,39 @@
 				<!--nav end-->
 			</header>
 
+		<!--</div>-->
 		</div>
-		
 		<div class="container">
 			<div class="row">
-				<div class="col-sm-9">
-				<div class="panel-heading">博文搜索</div>
-							<div class="panel-body">
-								<p>姓名: 周贤伟</p>
-								<p>QQ: 928681331</p>
-								<p>现居: 广东省 - 广州市</p>
-								<p>爱好: 下棋，看电影</p>
-								<p>喜欢的音乐: 《月光》,《光辉岁月》...</p>
-							</div>
+				<div  id="box">
+					<$  pictures.forEach(function(picture){ $>
+						<div class="col-sm-4 ">
+							<img alt="image <$= picture.imgname $>" src="<$= picture.imgurl $>" style="width: 220px; height: 220px;" />
+						</div>
+						
+					<$ }) $>
 				</div>
-					
-					<div class="col-sm-3 content-right">
-					<div id="searchinner">	
-					</div>
-					<div id="hotcontent">
-					</div>
-				</div>
-				</div>
-				<div class="container" id="bottomsy">
+				
+			</div>
+			
+
+	<div id="bg"></div>
+<div id="bottom">
+	
+	<ul>
+    	<li class="prev"></li>
+        <li class="img"></li>
+        <li class="next"></li>
+        <li class="close"></li>
+    </ul>
+</div>	
+<div id="frame"></div>
+
+<div class="container" id="bottomsy">
 					<p>Powered by dedecms Copyright &copy; 2016 www.xxx.com All rights reserved. </p>
 				</div>
-			</div>
+</div>
+
+
 	</body>
 </html>

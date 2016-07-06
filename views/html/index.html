@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
@@ -10,7 +11,14 @@
 		<link rel="stylesheet" type="text/css" href="/css/public.css" />
 		<link rel="stylesheet" type="text/css" href="/css/jquery.ad-gallery.css" />
 		<link rel="stylesheet" type="text/css" href="/css/site.min.css" />
+		<script type="text/javascript">
+			$(function(){
+				M.searchinner();
+				M.hotlistinner();
+			})
+		</script>
 	</head>
+
 	<body>
 		<div class="container">
 
@@ -43,7 +51,7 @@
 								<li class="list"><a href="/html/hou?curPage=1">后端</a>
 								</li>
 								<li><a href="/html/photo">相册</a></li>
-								<li><a href="#">留言板</a></li>
+								<li><a href="/html/comment">留言板</a></li>
 								<li><a href="/login.html">后台入口</a></li>
 							</ul>
 						</div>
@@ -55,21 +63,63 @@
 			</header>
 
 		</div>
-		
 		<div class="container">
 			<div class="row">
-				<div class="col-sm-9">
-				<div class="panel-heading">博文搜索</div>
-							<div class="panel-body">
-								<p>姓名: 周贤伟</p>
-								<p>QQ: 928681331</p>
-								<p>现居: 广东省 - 广州市</p>
-								<p>爱好: 下棋，看电影</p>
-								<p>喜欢的音乐: 《月光》,《光辉岁月》...</p>
+				<div class="col-sm-9 col-xs-12 content-left">
+					<h2><p><span>前端</span>知识</p></h2>
+
+					<div id="qian-content" class="hidden-xs">
+						<$ contents[0].forEach(function(content){ $>
+							<div>
+								<h5><$= content.title $></h5>
+								<p><span>发布时间:<$= content.time $></span>&nbsp;<span>作者:<$= content.aname $></span>&nbsp;<span>类型:<$= content.ptype==0?'前端/':'后端/' $><$= content.tname $></span></p>
+								<$- content.content $>
 							</div>
+
+							
+							<div class="border_i"><a href="/html/qian/archive?nid=<$= content.nid $>">阅读全文>></a></div>
+
+							<$})$>
+					</div>
+
+					<div id="qian-content" class="visible-xs">
+						<$ contents[0].forEach(function(content){ $>
+							<div>
+								<h5><$= content.title $></h5>
+								<p><span>发布时间:<$= content.time $></span>&nbsp;<span>作者:<$= content.aname $></span>&nbsp;<span>类型:<$= content.ptype==0?'前端/':'后端/' $><$= content.tname $></span></p>
+								
+
+							</div>
+
+							<div class="border_i"><a href="/html/qian/archive?nid=<$= content.nid $>">阅读全文>></a></div>
+
+							<$})$>
+					</div>
+
+					<h2><p><span>后台</span>知识</p></h2>
+					<div id="hou-content" class="hidden-xs">
+						<$ contents[1].forEach(function(content){ $>
+							<div>
+								<h5><$= content.title $></h5>
+								<p><span>发布时间:<$= content.time $></span>&nbsp;<span>作者:<$= content.aname $></span>&nbsp;<span>类型:<$= content.ptype==0?'前端/':'后端/' $><$= content.tname $></span></p>
+								<$- content.content $>
+							</div>
+							
+							<div class="border_i"><a href="/html/hou/archive?nid=<$= content.nid $>">阅读全文>></a></div>
+							<$})$>
+					</div>
+
+					<div id="hou-content" class="visible-xs">
+						<$ contents[1].forEach(function(content){ $>
+							<div>
+								<h5><$= content.title $></h5>
+								<p><span>发布时间:<$= content.time $></span>&nbsp;<span>作者:<$= content.aname $></span>&nbsp;<span>类型:<$= content.ptype==0?'前端/':'后端/' $><$= content.tname $></span></p>
+							</div>
+							<div class="border_i"><a href="/html/hou/archive?nid=<$= content.nid $>">阅读全文>></a></div>
+							<$})$>
+					</div>
 				</div>
-					
-					<div class="col-sm-3 content-right">
+				<div class="col-sm-3 content-right hidden-xs">
 					<div id="searchinner">	
 					</div>
 					<div id="hotcontent">
@@ -79,6 +129,9 @@
 				<div class="container" id="bottomsy">
 					<p>Powered by dedecms Copyright &copy; 2016 www.xxx.com All rights reserved. </p>
 				</div>
-			</div>
+				</div>
+	<$- include searchmodel.html-$>
+	<$- include hotlist.html -$>
 	</body>
+
 </html>

@@ -4,7 +4,7 @@
 	</div>
 
 	<div class="panel-body imgAdd">
-		<form class="form-horizontal" action="/upfiles" enctype="multipart/form-data" method="post">
+		<form class="form-horizontal" id="formimg" enctype="multipart/form-data" method="post" target="formsub">
 
 			<div class="form-group">
 				<label class="col-md-2 control-label"></label>
@@ -18,12 +18,33 @@
 					<input type="file" placeholder="选择图片" class="form-control" name="upfile">
 				</div>
 			</div>
+			
+			<div class="form-group">
+				<label class="col-md-2 control-label">类型:</label>
+				<div class="col-md-10">
+					<select style="width: 100%;" name="pid" class="selecter_3" data-selecter-options='{"cover":"true"}'>
+						<% names.forEach(function(name){ %>
+							<option value="<%= name.pid %>"><%= name.pname %></option>
+						<% }) %>
+					</select>	
+				</div>
+			</div>
+			
 			<div class="form-group">
 				<div class="col-md-offset-2 col-md-10">
-					<button type="submit" class="btn btn-primary btn-block addbtn" name="addimg">增加</button>
+					<input type="submit" class="btn btn-primary btn-block addbtn" name="addimg">增加</input>
 				</div>
 			</div>
 		</form>
+		<iframe style="display:none;" name="formsub"></iframe>
 	</div>
+	<script type="text/javascript">
+	$(function(){
+		
+		var pid=$("#adminMain .imgAdd select[name=pid]").val();
+		$("#formimg").attr("action","/upfiles?pid="+pid);
+	})
+</script>
 </style>
+
 
